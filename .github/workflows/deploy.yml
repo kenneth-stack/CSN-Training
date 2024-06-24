@@ -29,4 +29,4 @@ jobs:
       run: sudo docker run -d --name csn-nginx -p 8080:80 csn-nginx
     
     - name: Test the web service
-      run: curl http://18.210.14.237:8080
+      run: curl -I http://localhost:8080
