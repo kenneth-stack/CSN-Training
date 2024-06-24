@@ -1,14 +1,14 @@
-name: test-runner
+name: deploy
 
 on: [push]
 
 jobs:
   deploy:
-    runs-on: self-hosted #ubuntu-latest
+    runs-on: self-hosted
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Check Current Directory
       run: pwd
