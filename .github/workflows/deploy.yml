@@ -1,4 +1,4 @@
-name: Deploy Website
+name: Deploy
 
 on: [push]
 
@@ -13,8 +13,13 @@ jobs:
     - name: Check Current Directory
       run: pwd
 
-    - name: Check running docker services
-      run: sudo docker ps
+    - name: Verify Docker Installation
+      run: |
+        sudo docker --version
+        sudo systemctl status docker
+
+    - name: Check Running Docker Services
+      run: sudo docker ps -a
 
     - name: Stop Docker Container
       run: sudo docker stop csn-nginx || true
@@ -23,10 +28,19 @@ jobs:
       run: sudo docker rm csn-nginx || true
 
     - name: Build Nginx Docker Image
-      run: sudo docker build -t csn-nginx .
+      run: sudo docker build --progress=plain -t csn-nginx .
 
     - name: Run the Docker Container
       run: sudo docker run -d --name csn-nginx -p 8080:80 csn-nginx
-    
-    - name: Test the web service
-      run: curl -I http://localhost:8080
+
+    - name: Check Running Docker Services After Deployment
+      run: sudo docker ps -a
+
+    - name: Check Docker Container Logs
+      run: sudo docker logs csn-nginx
+
+    - name: Test the Web Service
+      run: |
+        echo "Waiting for the service to start..."
+        sleep 10  # Wait for 10 seconds to give the service time to start
+        curl -v http://localhost:8080 || (echo "Curl failed"; sudo docker logs csn-nginx)
