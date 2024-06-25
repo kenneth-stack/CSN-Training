@@ -61,8 +61,8 @@ sudo usermod -aG docker ec2-user</code></pre>
     on: [push]
 
     jobs:
-    deploy:
-    runs-on: self-hosted
+     deploy:
+      runs-on: self-hosted
 
     steps:
     - name: Checkout code
