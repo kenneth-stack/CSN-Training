@@ -86,7 +86,7 @@ sudo usermod -aG docker ec2-user</code></pre>
       run: sudo docker rm csn-nginx || true
 
     - name: Build Nginx Docker Image
-      run: sudo docker build --progress=plain -t csn-nginx .
+      run: sudo docker build -t csn-nginx .
 
     - name: Run the Docker Container
       run: sudo docker run -d --name csn-nginx -p 8080:80 csn-nginx
