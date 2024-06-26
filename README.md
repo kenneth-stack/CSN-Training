@@ -34,8 +34,8 @@
   <h3>Connect to Your EC2 Instance:</h3>
     <pre><code>ssh -i /path/to/your-key.pem ec2-user@your-ec2-instance-public-dns</code></pre>
 <h3>Install Docker:</h3>
-    <pre><code>sudo yum update -y
-sudo amazon-linux-extras install docker -y
+    <pre><code>sudo apt update -y
+sudo apt install docker -y
 sudo service docker start
 sudo usermod -aG docker ec2-user</code></pre>
 
